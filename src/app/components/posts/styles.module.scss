@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .wrapper {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 24px;
+  }
+}
+
+.formWrapper {
+  border-radius: 16px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--gray-scale-400);
+
+  .formHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+
+    .metaWrapper {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .meta {
+      flex: 1;
+    }
+  }
+
+  .formBody {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+    border: 1px dashed var(--gray-scale-100);
+    border-radius: 16px;
+    background-color: var(--gray-scale-800);
+
+    .previewImg {
+      width: 300px;
+      height: 300px;
+      object-fit: contain;
+    }
+
+    .uploadImg {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .formFooter {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    .submitBtn {
+      background-color: transparent;
+      color: var(--orange-scale-400);
+      border: 1px solid var(--orange-scale-400);
+      padding: 8px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+
+      &:disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+        border: 1px solid var(--gray-scale-500);
+        color: var(--gray-scale-500);
+      }
+
+      &:hover {
+        border: 1px solid var(--orange-scale-500);
+        color: var(--orange-scale-500);
+      }
+    }
+  }
+}
+
+.helperTxt {
+  font-size: 14px;
+  color: var(--gray-scale-500);
+}
+
+.listWrapper {
+}
