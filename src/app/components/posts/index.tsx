@@ -17,6 +17,7 @@ export default function Posts() {
   const [file, setFile] = useState<File>();
   const [preview, setPreview] = useState<string | ArrayBuffer | null>();
   const [comment, setComment] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -42,6 +43,7 @@ export default function Posts() {
     }
 
     try {
+      setIsUploading(true);
       const results = await uploadFile(file);
 
       const res = await fetch("/api/posts", {
@@ -52,6 +54,7 @@ export default function Posts() {
           message: comment,
         }),
       });
+      setIsUploading(false);
 
       if (!res.ok) {
         alert("Create a post failed");
@@ -66,10 +69,10 @@ export default function Posts() {
     const file = e.target.files?.[0];
 
     if (!file) return;
-    const maxSize = 5 * 1024 * 1024; // 5MB
+    const maxSize = 100 * 1024; // 100kB
 
     if (file.size > maxSize) {
-      alert("File size exceeds 5MB limit.");
+      alert("File size exceeds 100kB limit.");
       return;
     }
 
@@ -153,7 +156,7 @@ export default function Posts() {
             )}
           </div>
           <div className={styles.helperTxt}>
-            Max file size is 5M. Supported files are jpg, and png.
+            Max file size is 100kB. Supported files are jpg, and png.
           </div>
           {/* E - Form Body */}
 
@@ -163,7 +166,7 @@ export default function Posts() {
               type="submit"
               value="Post"
               className={styles.submitBtn}
-              disabled={!file}
+              disabled={!file || isUploading}
             />
           </div>
           {/* E - Form Footer */}
