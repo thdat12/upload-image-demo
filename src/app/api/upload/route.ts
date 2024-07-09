@@ -1,6 +1,4 @@
-import { writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
-import { join } from "path";
 
 export async function POST(request: NextRequest) {
   const data = await request.formData();
@@ -9,18 +7,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: false });
   }
   const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
-  const uploadDir = join(process.cwd(), "public");
+  const base64 = Buffer.from(bytes).toString("base64");
 
   const fileNm = new Date().valueOf() + "";
   const ext = file.name.split(".").reverse()[0];
 
-  const path = join(uploadDir, `${fileNm}.${ext}`);
-
-  await writeFile(path, buffer);
-
   return NextResponse.json({
     success: true,
-    data: { fileNm: `${fileNm}.${ext}` },
+    results: { fileNm: `${fileNm}.${ext}`, base64 },
   });
 }

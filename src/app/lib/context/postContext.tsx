@@ -7,7 +7,8 @@ type PostProviderProps = {
 export type PostType = {
   id: string;
   fileNm: string;
-  comment: string;
+  fileData: string;
+  message: string;
 };
 
 const PostContext = createContext({

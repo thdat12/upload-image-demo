@@ -29,8 +29,8 @@ export default function Posts() {
     if (!res.ok) {
       setPosts([]);
     }
-    const { data } = await res.json();
-    setPosts(data);
+    const { result } = await res.json();
+    setPosts(result);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -47,8 +47,9 @@ export default function Posts() {
       const res = await fetch("/api/posts", {
         method: "POST",
         body: JSON.stringify({
-          fileNm: results.data.fileNm,
-          comment: comment,
+          fileNm: results.results.fileNm,
+          fileData: results.results.base64,
+          message: comment,
         }),
       });
 

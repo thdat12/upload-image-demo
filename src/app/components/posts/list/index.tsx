@@ -18,8 +18,8 @@ export default function PostList() {
       if (!res.ok) {
         alert("Delete post failed");
       }
-      const result = await res.json();
-      setPosts(result?.data);
+      const { result } = await res.json();
+      setPosts(posts.filter((post) => post?.id !== result?.id));
     }
   };
 
@@ -39,13 +39,13 @@ export default function PostList() {
             >
               <picture>
                 <img
-                  src={
-                    typeof post?.fileNm === "string" ? "/" + post.fileNm : ""
-                  }
+                  src={`data:image/${
+                    post?.fileNm?.split(".").reverse()[0]
+                  };base64, ${post?.fileData}`}
                   alt=""
                 />
               </picture>
-              <div className={styles.comment}>{post?.comment}</div>
+              <div className={styles.comment}>{post?.message}</div>
             </div>
           ))}
         </div>
